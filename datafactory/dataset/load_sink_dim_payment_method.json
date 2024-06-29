@@ -1,0 +1,26 @@
+{
+	"name": "load_sink_dim_payment_method",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Payment_Method_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "Payment_Method",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "payment_method"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

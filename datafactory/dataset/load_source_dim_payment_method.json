@@ -1,0 +1,34 @@
+{
+	"name": "load_source_dim_payment_method",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "import_data_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "part-00000-tid-8180249455324163688-b610d97c-c021-4485-a45d-852bbcf35e6e-59-1-c000.csv",
+				"folderPath": "dim_payment_method_transformed",
+				"container": "transformed-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Payment Method ID",
+				"type": "String"
+			},
+			{
+				"name": "Payment Method",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

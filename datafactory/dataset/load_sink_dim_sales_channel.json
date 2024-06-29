@@ -1,0 +1,26 @@
+{
+	"name": "load_sink_dim_sales_channel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Sales_Channel_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "Sales_Channel",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "sales_channel"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

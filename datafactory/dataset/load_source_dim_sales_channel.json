@@ -1,0 +1,34 @@
+{
+	"name": "load_source_dim_sales_channel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "import_data_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "part-00000-tid-1896781042704760434-bee5f7e0-cb53-4e4a-b552-a3abcfc0d476-50-1-c000.csv",
+				"folderPath": "dim_sales_channel_transformed",
+				"container": "transformed-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Sales Channel ID",
+				"type": "String"
+			},
+			{
+				"name": "Sales Channel",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,497 @@
+{
+	"name": "data_load_pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "ADLS_to_SQL_payment_method",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "ADLS_to_SQL_customers",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Payment Method ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Payment_Method_ID",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Payment Method",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Payment_Method",
+									"type": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "load_source_dim_payment_method",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "load_sink_dim_payment_method",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "ADLS_to_SQL_customers",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Customer ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Customer_ID",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Customer Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Customer_Name",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Type",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Type",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "City",
+									"type": "String"
+								},
+								"sink": {
+									"name": "City",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Country",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Country",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Latitude",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Latitude",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Longitude",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Longitude",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Age",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Age",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Gender",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Gender",
+									"type": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "load_source_dim_customers",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "load_sink_dim_customers",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "ADLS_to_SQL_sales_channel",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "ADLS_to_SQL_payment_method",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Sales Channel ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Sales_Channel_ID",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Sales Channel",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Sales_Channel",
+									"type": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "load_source_dim_sales_channel",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "load_sink_dim_sales_channel",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "ADLS_to_SQL_sales",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "ADLS_to_SQL_sales_channel",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Order ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Order_ID",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Customer ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Customer_ID",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Customer Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Customer_Name",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Quantity",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Quantity",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Total Amount",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Total_Amount",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tax Amount",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Tax_Amount",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Shipping Cost",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Shipping_Cost",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Manufactory Costs",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Manufactory_Costs",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Payment Method ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Payment_Method_ID",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Sales Channel ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Sales_Channel_ID",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Order Status",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Order_Status",
+									"type": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Profit",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Profit",
+									"type": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "load_source_fact_sales",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "load_sink_fact_sales",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2024-06-24T21:11:51Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

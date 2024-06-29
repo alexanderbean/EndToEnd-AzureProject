@@ -1,0 +1,101 @@
+{
+	"name": "ingest_source_fact_sales",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "import_data_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "fact_sales.csv",
+				"container": "staging-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Order ID",
+				"type": "String"
+			},
+			{
+				"name": "Customer ID",
+				"type": "String"
+			},
+			{
+				"name": "Customer Name",
+				"type": "String"
+			},
+			{
+				"name": "Quantity",
+				"type": "String"
+			},
+			{
+				"name": "Total Amount",
+				"type": "String"
+			},
+			{
+				"name": "Tax Amount",
+				"type": "String"
+			},
+			{
+				"name": "Shipping Cost",
+				"type": "String"
+			},
+			{
+				"name": "Manufactory Costs",
+				"type": "String"
+			},
+			{
+				"name": "Payment Method ID",
+				"type": "String"
+			},
+			{
+				"name": "Sales Channel ID",
+				"type": "String"
+			},
+			{
+				"name": "Delivery Channel ID",
+				"type": "String"
+			},
+			{
+				"name": "Order Status",
+				"type": "String"
+			},
+			{
+				"name": "Progress Status ID",
+				"type": "String"
+			},
+			{
+				"name": "Profit",
+				"type": "String"
+			},
+			{
+				"name": "Store ID",
+				"type": "String"
+			},
+			{
+				"name": "Discount FLAG",
+				"type": "String"
+			},
+			{
+				"name": "Employee ID",
+				"type": "String"
+			},
+			{
+				"name": "Customer Feedback",
+				"type": "String"
+			},
+			{
+				"name": "Warranty ID",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

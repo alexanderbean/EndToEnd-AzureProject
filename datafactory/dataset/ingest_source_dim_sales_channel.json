@@ -1,0 +1,33 @@
+{
+	"name": "ingest_source_dim_sales_channel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "import_data_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "dim_sales_channel.csv",
+				"container": "staging-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Sales Channel ID",
+				"type": "String"
+			},
+			{
+				"name": "Sales Channel",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

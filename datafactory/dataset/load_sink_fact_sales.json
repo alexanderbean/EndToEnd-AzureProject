@@ -1,0 +1,66 @@
+{
+	"name": "load_sink_fact_sales",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Order_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "Customer_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "Customer_Name",
+				"type": "varchar"
+			},
+			{
+				"name": "Quantity",
+				"type": "varchar"
+			},
+			{
+				"name": "Total_Amount",
+				"type": "varchar"
+			},
+			{
+				"name": "Tax_Amount",
+				"type": "varchar"
+			},
+			{
+				"name": "Shipping_Cost",
+				"type": "varchar"
+			},
+			{
+				"name": "Manufactory_Costs",
+				"type": "varchar"
+			},
+			{
+				"name": "Payment_Method_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "Sales_Channel_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "Order_Status",
+				"type": "varchar"
+			},
+			{
+				"name": "Profit",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "sales"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

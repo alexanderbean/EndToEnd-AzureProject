@@ -1,0 +1,74 @@
+{
+	"name": "load_source_fact_sales",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "import_data_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "part-00000-tid-2430536421913862071-4e6a516c-55c1-41b3-88df-b06d7a4eb0e6-89-1-c000.csv",
+				"folderPath": "fact_sales_transformed",
+				"container": "transformed-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Order ID",
+				"type": "String"
+			},
+			{
+				"name": "Customer ID",
+				"type": "String"
+			},
+			{
+				"name": "Customer Name",
+				"type": "String"
+			},
+			{
+				"name": "Quantity",
+				"type": "String"
+			},
+			{
+				"name": "Total Amount",
+				"type": "String"
+			},
+			{
+				"name": "Tax Amount",
+				"type": "String"
+			},
+			{
+				"name": "Shipping Cost",
+				"type": "String"
+			},
+			{
+				"name": "Manufactory Costs",
+				"type": "String"
+			},
+			{
+				"name": "Payment Method ID",
+				"type": "String"
+			},
+			{
+				"name": "Sales Channel ID",
+				"type": "String"
+			},
+			{
+				"name": "Order Status",
+				"type": "String"
+			},
+			{
+				"name": "Profit",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
