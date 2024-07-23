@@ -1,6 +1,6 @@
 # EndToEnd-AzureProject
 
-This is my first data engineering project and my first non-academic project.
+This is my first attempt at a simple ETL pipeline project. It is also my first non-academic project.
 
 My goal in this project was to learn more about the development stages in a data engineering pipeline, and to gain hands-on practice with the Azure cloud platform and its many tools.
 
